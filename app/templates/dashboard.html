@@ -1,63 +1,155 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Dashboard - AptiForge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .dashboard-wrapper {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+        }
 
-    <title>Dashboard</title>
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
 
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-    >
+        .welcome h1 {
+            font-size: 2rem;
+            margin-bottom: 4px;
+        }
 
+        .welcome p {
+            color: #94a3b8;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 14px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-card .label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #f8fafc;
+        }
+
+        .stat-card.level .value {
+            color: #34d399;
+        }
+
+        .action-section {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 36px;
+            text-align: center;
+        }
+
+        .action-section h2 {
+            margin-bottom: 12px;
+        }
+
+        .action-section p {
+            color: #94a3b8;
+            margin-bottom: 28px;
+        }
+
+        .logout-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .logout-link:hover {
+            color: #f87171;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
+<div class="dashboard-wrapper">
 
-    <h1>Welcome, {{ username }}</h1>
-
-    <h2>Your Learning Dashboard</h2>
-
-    <div class="card">
-
-        <p>
-            <strong>Current Level:</strong>
-            {{ progress.level }}
-        </p>
-
-        <p>
-            <strong>Total Score:</strong>
-            {{ progress.score }}
-        </p>
-
-        <p>
-            <strong>Correct Answers:</strong>
-            {{ progress.correct_answers }}
-        </p>
-
-        <p>
-            <strong>Wrong Answers:</strong>
-            {{ progress.wrong_answers }}
-        </p>
-
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="welcome">
+            <h1>Welcome, {{ username }}</h1>
+            <p>Your Adaptive Aptitude Dashboard</p>
+        </div>
+        <div class="brand" style="font-size:1.4rem;">AptiForge</div>
     </div>
 
-    <br>
+    <!-- Stats -->
+    <div class="stats-grid">
+        <div class="stat-card level">
+            <div class="label">Current Level</div>
+            <div class="value">{{ progress.level }}</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">Total Score</div>
+            <div class="value">{{ progress.score }}</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">Correct</div>
+            <div class="value">{{ progress.correct_answers }}</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">Wrong</div>
+            <div class="value">{{ progress.wrong_answers }}</div>
+        </div>
+    </div>
 
-    <a href="{{ url_for('quiz') }}">
-        <button>Start / Continue Test</button>
-    </a>
+    <!-- Main Action -->
+    <div class="action-section">
+        <h2>
+            {% if progress.level == 1 %}
+                Level 1 — Easy
+            {% elif progress.level == 2 %}
+                Level 2 — Medium
+            {% else %}
+                Level 3 — Hard
+            {% endif %}
+        </h2>
+        <p>
+            {% if progress.level < 3 %}
+                Score 70% or higher to unlock the next level.
+            {% else %}
+                You have reached the highest level. Keep practicing!
+            {% endif %}
+        </p>
 
-    <br><br>
+        <a href="{{ url_for('quiz') }}" class="btn" style="font-size:1.1rem; padding:16px 40px;">
+            Start / Continue Test
+        </a>
+    </div>
 
-    <a href="{{ url_for('logout') }}">
-        Logout
-    </a>
+    <div class="text-center">
+        <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+    </div>
 
 </div>
 
 </body>
-
 </html>

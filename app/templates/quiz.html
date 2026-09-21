@@ -1,183 +1,84 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <title>AptiForge - Aptitude Test</title>
-
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-    >
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
 
 <div class="container">
 
     <!-- Quiz Header -->
-
     <div class="quiz-header">
-
         <p class="question-number">
             Question {{ question_number }} of {{ total }}
         </p>
 
         <div class="progress-container">
-
-            <div
-                class="progress-bar"
-                style="width: {{ (question_number / total) * 100 }}%;"
-            ></div>
-
+            <div class="progress-bar"
+                 style="width: {{ (question_number / total) * 100 }}%;">
+            </div>
         </div>
-
     </div>
 
-
     <!-- Question Card -->
-
     <div class="question-card">
 
         <div class="question-text">
-
-            {{ question["Question"] }}
-
+            {{ question.Question }}
         </div>
-
 
         <!-- ============================= -->
         <!-- BEFORE ANSWER -->
         <!-- ============================= -->
-
         {% if not feedback %}
 
         <form method="POST">
 
+            {% for opt in question.options %}
             <label class="option">
-
-                <input
-                    type="radio"
-                    name="answer"
-                    value="A"
-                    required
-                >
-
+                <input type="radio"
+                       name="answer"
+                       value="{{ opt.key }}"
+                       required>
                 <span>
-                    <strong>A.</strong>
-                    {{ question["OptionA"] }}
+                    <strong>{{ opt.key }}.</strong>
+                    {{ opt.text }}
                 </span>
-
             </label>
-
-
-            <label class="option">
-
-                <input
-                    type="radio"
-                    name="answer"
-                    value="B"
-                >
-
-                <span>
-                    <strong>B.</strong>
-                    {{ question["OptionB"] }}
-                </span>
-
-            </label>
-
-
-            <label class="option">
-
-                <input
-                    type="radio"
-                    name="answer"
-                    value="C"
-                >
-
-                <span>
-                    <strong>C.</strong>
-                    {{ question["OptionC"] }}
-                </span>
-
-            </label>
-
-
-            <label class="option">
-
-                <input
-                    type="radio"
-                    name="answer"
-                    value="D"
-                >
-
-                <span>
-                    <strong>D.</strong>
-                    {{ question["OptionD"] }}
-                </span>
-
-            </label>
-
+            {% endfor %}
 
             <br>
-
-            <button type="submit">
-
-                Submit Answer
-
-            </button>
+            <button type="submit">Submit Answer</button>
 
         </form>
 
         {% endif %}
 
-
         <!-- ============================= -->
         <!-- AFTER ANSWER -->
         <!-- ============================= -->
-
         {% if feedback %}
 
         <div class="feedback">
-
-            <h3>
-                {{ feedback }}
-            </h3>
-
+            <h3>{{ feedback }}</h3>
 
             {% if explanation %}
-
             <div class="explanation">
-
                 <strong>Explanation:</strong>
-
-                <p>
-                    {{ explanation }}
-                </p>
-
+                <p>{{ explanation }}</p>
             </div>
-
             {% endif %}
-
         </div>
 
-
-        <!-- Next Question -->
-
         <div class="next-question">
-
-            <a
-                href="{{ url_for('next_question') }}"
-                class="btn"
-            >
+            <a href="{{ url_for('next_question') }}" class="btn">
                 {% if question_number == total %}
                     View Result
                 {% else %}
                     Next Question →
                 {% endif %}
             </a>
-
         </div>
 
         {% endif %}
@@ -187,5 +88,4 @@
 </div>
 
 </body>
-
 </html>

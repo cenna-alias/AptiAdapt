@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AptiForge - Adaptive Aptitude Test</title>
+    <title>AptiAdapt - Adaptive Aptitude Test</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
         body {
             background: #020617;
             overflow-x: hidden;
+            margin: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: #e2e8f0;
         }
 
         .hero {
@@ -17,7 +20,6 @@
             position: relative;
         }
 
-        /* subtle grid background */
         .hero::before {
             content: "";
             position: absolute;
@@ -65,6 +67,7 @@
             padding: 10px 22px;
             border-radius: 8px;
             font-weight: 600;
+            text-decoration: none;
         }
 
         .btn-signin:hover {
@@ -79,7 +82,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px 20px;
+            padding: 40px 20px 80px;
             position: relative;
             z-index: 5;
         }
@@ -99,7 +102,7 @@
         }
 
         .hero-title {
-            font-size: 3.8rem;
+            font-size: 3.6rem;
             font-weight: 800;
             line-height: 1.15;
             max-width: 900px;
@@ -118,7 +121,7 @@
             color: #94a3b8;
             max-width: 680px;
             margin-bottom: 48px;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .hero-buttons {
@@ -161,32 +164,153 @@
             color: #34d399;
         }
 
-        .features {
-            display: flex;
-            gap: 40px;
-            margin-top: 80px;
-            flex-wrap: wrap;
-            justify-content: center;
+        /* ===== NEW SECTIONS ===== */
+        .section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 24px;
         }
 
-        .feature {
+        .section-title {
             text-align: center;
-            max-width: 200px;
-        }
-
-        .feature-icon {
-            font-size: 1.8rem;
-            margin-bottom: 12px;
-        }
-
-        .feature h4 {
+            font-size: 2rem;
+            font-weight: 700;
             color: #f1f5f9;
-            margin-bottom: 6px;
+            margin-bottom: 16px;
         }
 
-        .feature p {
+        .section-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+
+        /* How it Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 28px;
+        }
+
+        .step {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+            transition: all 0.25s ease;
+        }
+
+        .step:hover {
+            border-color: #10b981;
+            transform: translateY(-4px);
+        }
+
+        .step-number {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #10b981, #14b8a6);
+            color: #022c22;
+            font-weight: 800;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            font-size: 1.1rem;
+        }
+
+        .step h4 {
+            color: #f1f5f9;
+            margin-bottom: 10px;
+            font-size: 1.15rem;
+        }
+
+        .step p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Topics */
+        .topics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .topic-card {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 14px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .topic-card h4 {
+            color: #34d399;
+            margin-bottom: 8px;
+            font-size: 1.15rem;
+        }
+
+        .topic-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Benefits */
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .benefit {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 14px;
+            padding: 28px 24px;
+        }
+
+        .benefit h4 {
+            color: #f1f5f9;
+            margin-bottom: 10px;
+            font-size: 1.15rem;
+        }
+
+        .benefit p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid #1e293b;
+            padding: 40px 24px;
+            text-align: center;
             color: #64748b;
             font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #34d399;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 20px 24px;
+            }
+            .hero-title {
+                font-size: 2.6rem;
+            }
         }
     </style>
 </head>
@@ -195,7 +319,7 @@
 <div class="hero">
     <!-- Navbar -->
     <div class="navbar">
-        <div class="nav-brand">AptiForge</div>
+        <div class="nav-brand">AptiAdapt</div>
         <div class="nav-links">
             <a href="{{ url_for('login') }}" class="btn-signin">Sign in</a>
         </div>
@@ -213,7 +337,7 @@
         </h1>
 
         <p class="hero-subtitle">
-            AptiForge measures placement readiness the way GRE and GMAT do — 
+            AptiAdapt measures placement readiness the way GRE and GMAT do — 
             with a computerised adaptive test. Questions get harder when you are right, 
             easier when you are wrong, and the engine reports your ability with confidence.
         </p>
@@ -222,27 +346,94 @@
             <a href="{{ url_for('register') }}" class="btn-primary">Start an adaptive test</a>
             <a href="{{ url_for('login') }}" class="btn-secondary">Already have an account?</a>
         </div>
-
-        <!-- Small features -->
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">📈</div>
-                <h4>Adaptive Difficulty</h4>
-                <p>Questions adjust to your level in real time</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🧠</div>
-                <h4>AI Skill Report</h4>
-                <p>Get Beginner / Intermediate / Advanced prediction</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🎯</div>
-                <h4>Placement Focused</h4>
-                <p>Quant · Logical · Verbal · Technical</p>
-            </div>
-        </div>
     </div>
 </div>
+
+<!-- How it Works -->
+<section class="section">
+    <h2 class="section-title">How it Works</h2>
+    <p class="section-subtitle">
+        A smart testing process that adapts to your ability in real time using Item Response Theory (IRT).
+    </p>
+
+    <div class="steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <h4>Start the Test</h4>
+            <p>Begin with a medium-difficulty question. No fixed paper — every test is unique.</p>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <h4>Adaptive Engine</h4>
+            <p>Correct answers → harder questions. Wrong answers → easier ones. The system homes in on your true level.</p>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <h4>Ability Estimation</h4>
+            <p>Using IRT, the engine calculates your ability score (θ) with statistical confidence.</p>
+        </div>
+        <div class="step">
+            <div class="step-number">4</div>
+            <h4>AI Skill Report</h4>
+            <p>Receive a clear skill prediction: Beginner, Intermediate, Advanced or Expert.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Topics Covered -->
+<section class="section">
+    <h2 class="section-title">Topics Covered</h2>
+    <p class="section-subtitle">
+        Designed for campus placements and competitive exams.
+    </p>
+
+    <div class="topics">
+        <div class="topic-card">
+            <h4>Quantitative Aptitude</h4>
+            <p>Arithmetic, Algebra, Geometry, Data Interpretation & Number Systems</p>
+        </div>
+        <div class="topic-card">
+            <h4>Logical Reasoning</h4>
+            <p>Puzzles, Seating Arrangement, Syllogisms, Blood Relations & Coding-Decoding</p>
+        </div>
+        <div class="topic-card">
+            <h4>Verbal Ability</h4>
+            <p>Reading Comprehension, Grammar, Vocabulary & Sentence Correction</p>
+        </div>
+        <div class="topic-card">
+            <h4>Technical Basics</h4>
+            <p>Programming fundamentals, Data Structures concepts & basic CS theory</p>
+        </div>
+    </div>
+</section>
+
+<!-- Why Adaptive -->
+<section class="section">
+    <h2 class="section-title">Why Adaptive Testing?</h2>
+    <p class="section-subtitle">
+        Traditional fixed tests waste time on questions that are too easy or too hard. Adaptive tests are smarter.
+    </p>
+
+    <div class="benefits">
+        <div class="benefit">
+            <h4>Higher Accuracy</h4>
+            <p>Measures your true ability more precisely than a fixed-length paper of the same length.</p>
+        </div>
+        <div class="benefit">
+            <h4>Shorter & Fairer</h4>
+            <p>Fewer questions needed to reach a reliable score. Every student gets a test matched to their level.</p>
+        </div>
+        <div class="benefit">
+            <h4>Real Placement Signal</h4>
+            <p>Similar approach used by GRE, GMAT and many modern hiring assessments.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>AptiAdapt · Mini Project · Adaptive Aptitude Testing with IRT & AI Skill Prediction</p>
+</footer>
 
 </body>
 </html>

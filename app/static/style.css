@@ -180,35 +180,226 @@ label {
     font-size: 0.95rem;
 }
 
-/* ---------- Result page ---------- */
-.result-card h1 {
+/* ========== RESULT PAGE - PROFESSIONAL DARK THEME ========== */
+
+.result-page {
+    max-width: 640px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* Title */
+.result-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 40px;
+    letter-spacing: -0.5px;
+}
+
+/* Cards */
+.card {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 16px;
+    padding: 32px 28px;
+    margin-bottom: 28px;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    text-align: left;
+}
+
+.result-card {
+    border-top: 3px solid #10b981;
+}
+
+.prediction-card {
+    border-top: 3px solid #3b82f6;
+}
+
+/* Card titles */
+.card-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #94a3b8;
+    margin: 0 0 28px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* ===== Stats Grid ===== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.stat-item {
+    background: #0f172a;
+    border-radius: 12px;
+    padding: 20px 12px;
+    text-align: center;
+    border: 1px solid #1e293b;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-3px);
+    border-color: #10b981;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-bottom: 8px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+/* Secondary stats (Correct / Wrong) */
+.secondary-stats {
+    display: flex;
+    gap: 16px;
+}
+
+.secondary-item {
+    flex: 1;
+    background: #0f172a;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid #1e293b;
+}
+
+.secondary-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-bottom: 6px;
+}
+
+.secondary-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.secondary-value.correct {
     color: #34d399;
 }
 
-.stat {
-    display: flex;
-    justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid #1e293b;
+.secondary-value.wrong {
+    color: #f87171;
 }
 
-.stat:last-child {
-    border-bottom: none;
+/* ===== AI Prediction Section ===== */
+.prediction-text {
+    color: #94a3b8;
+    font-size: 1rem;
+    margin: 0 0 16px 0;
 }
+
+/* ===== Skill Badge - Dynamic Colors ===== */
 
 .skill-badge {
     display: inline-block;
-    margin-top: 12px;
-    padding: 8px 20px;
-    border-radius: 50px;
+    color: white;
+    font-size: 1.5rem;
     font-weight: 700;
-    font-size: 1.1rem;
+    padding: 12px 36px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
 }
 
-.skill-Advanced { background: #064e3b; color: #34d399; }
-.skill-Intermediate { background: #1e3a5f; color: #60a5fa; }
-.skill-Beginner { background: #3b1f1f; color: #f87171; }
+/* Beginner - Warm Orange */
+.skill-badge.beginner {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    box-shadow: 0 8px 20px -6px rgba(245, 158, 11, 0.5);
+}
 
+/* Intermediate - Blue */
+.skill-badge.intermediate {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    box-shadow: 0 8px 20px -6px rgba(59, 130, 246, 0.5);
+}
+
+/* Advanced - Purple */
+.skill-badge.advanced {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    box-shadow: 0 8px 20px -6px rgba(139, 92, 246, 0.5);
+}
+
+/* Expert - Emerald Green */
+.skill-badge.expert {
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 8px 20px -6px rgba(16, 185, 129, 0.5);
+}
+
+/* Default fallback */
+.skill-badge.default {
+    background: linear-gradient(135deg, #64748b, #475569);
+    box-shadow: 0 8px 20px -6px rgba(100, 116, 139, 0.5);
+}
+
+/* Messages */
+.message {
+    font-size: 1rem;
+    color: #94a3b8;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.message.success {
+    color: #34d399;
+    font-weight: 500;
+}
+
+/* ===== Back Button ===== */
+.btn-back {
+    display: inline-block;
+    margin-top: 12px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 14px 36px;
+    border-radius: 12px;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 20px -6px rgba(16, 185, 129, 0.4);
+}
+
+.btn-back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px -6px rgba(16, 185, 129, 0.55);
+    background: linear-gradient(135deg, #34d399, #10b981);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-title {
+        font-size: 2rem;
+    }
+
+    .card {
+        padding: 24px 20px;
+    }
+}
 /* ---------- Dashboard ---------- */
 .dashboard-header {
     display: flex;

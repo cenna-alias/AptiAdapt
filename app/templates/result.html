@@ -1,89 +1,78 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
     <title>Test Result</title>
-
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-    >
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
 
-<div class="container">
+<div class="container result-page">
 
-    <h1>Test Completed</h1>
+    <h1 class="result-title">Test Completed</h1>
 
-    <div class="card">
+    <!-- Performance Card -->
+    <div class="card result-card">
+        <h2 class="card-title">Your Performance</h2>
 
-        <h2>Your Result</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-label">Level</span>
+                <span class="stat-value">{{ level }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Score</span>
+                <span class="stat-value">{{ score }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Accuracy</span>
+                <span class="stat-value">{{ accuracy }}%</span>
+            </div>
+        </div>
 
-        <p>
-            <strong>Level:</strong>
-            {{ level }}
-        </p>
-
-        <p>
-            <strong>Score:</strong>
-            {{ score }}
-        </p>
-
-        <p>
-            <strong>Correct Answers:</strong>
-            {{ correct }}
-        </p>
-
-        <p>
-            <strong>Wrong Answers:</strong>
-            {{ wrong }}
-        </p>
-
-        <p>
-            <strong>Accuracy:</strong>
-            {{ accuracy }}%
-        </p>
-
-        <hr>
-
-        <h2>AI Skill Prediction</h2>
-
-        <p>
-            Your predicted skill level is:
-        </p>
-
-        <h2>
-            {{ predicted_skill }}
-        </h2>
-
-        {% if new_level > level %}
-
-            <p class="success">
-                Congratulations! You have progressed to
-                Level {{ new_level }}.
-            </p>
-
-        {% else %}
-
-            <p>
-                Continue practicing to improve your performance.
-            </p>
-
-        {% endif %}
-
+        <div class="secondary-stats">
+            <div class="secondary-item">
+                <span class="secondary-label">Correct</span>
+                <span class="secondary-value correct">{{ correct }}</span>
+            </div>
+            <div class="secondary-item">
+                <span class="secondary-label">Wrong</span>
+                <span class="secondary-value wrong">{{ wrong }}</span>
+            </div>
+        </div>
     </div>
 
-    <br>
+    <!-- AI Prediction Card -->
+    <div class="card prediction-card">
+        <h2 class="card-title">AI Skill Prediction</h2>
 
-    <a href="{{ url_for('dashboard') }}">
-        <button>Back to Dashboard</button>
+        <p class="prediction-text">Your predicted skill level is</p>
+
+        <div class="skill-badge 
+    {% if predicted_skill == 'Beginner' %}beginner
+    {% elif predicted_skill == 'Intermediate' %}intermediate
+    {% elif predicted_skill == 'Advanced' %}advanced
+    {% elif predicted_skill == 'Expert' %}expert
+    {% else %}default
+    {% endif %}">
+    {{ predicted_skill }}
+</div>
+
+        {% if new_level > level %}
+            <p class="message success">
+                Congratulations! You have progressed to Level {{ new_level }}.
+            </p>
+        {% else %}
+            <p class="message">
+                Continue practicing to improve your performance.
+            </p>
+        {% endif %}
+    </div>
+
+    <a href="{{ url_for('dashboard') }}" class="btn-back">
+        Back to Dashboard
     </a>
 
 </div>
 
 </body>
-
 </html>
